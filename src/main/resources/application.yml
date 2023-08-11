@@ -1,0 +1,48 @@
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+server:
+  servlet:
+    context-path: /account-services
+  error:
+    include-message: always
+  port: 28852
+  ssl:
+    enabled: true
+    enabled-protocols: TLSv1.2
+    key-alias: accountant_service
+    key-store: classpath:keystore/keystore.p12
+    key-store-password: service
+    key-store-type: PKCS12
+    protocol: TLS
+spring:
+  datasource:
+    driverClassName: org.h2.Driver
+    password: password
+    url: jdbc:h2:mem:service_db
+    username: sa
+  h2:
+    console:
+      enabled: true
+      settings:
+          trace: false
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+      write-single-elem-arrays-unwrapped: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+        ddl-auto: update
+springdoc:
+  api-docs:
+      path: /api-docs
+  swagger-ui:
+      enabled: true
+      path: /swagger-ui.html
